@@ -1,94 +1,105 @@
-TruEstate — Retail Sales Management System
+```
+# TruEstate — Retail Sales Management System
 
 A full-stack sales analytics dashboard featuring:
 
-🔍 Full-text search
-
-🎯 Advanced filters
-
-🔄 Sorting
-
-📄 Pagination
-
-📊 Clean, responsive UI
-
-🚀 Deployed on Railway + Vercel
+- 🔍 Full-text search
+- 🎯 Advanced filters
+- 🔄 Sorting
+- 📄 Pagination
+- 📊 Clean, responsive UI
+- 🚀 Deployed on Railway + Vercel
 
 Designed with modular architecture, maintainability, and scalability.
 
-🚀 Tech Stack
-Backend
-Tech	Usage
-Node.js	Runtime
-Express.js	REST API
-MongoDB Atlas	Database
-Railway	Deployment
-Frontend
-Tech	Usage
-React 18	UI Framework
-Vite	Dev/Build
-Tailwind/CSS	Styling
-Vercel	Deployment
-🔎 Search
+---
+
+## 🚀 Tech Stack
+
+### Backend
+
+| Tech         | Usage        |
+|-------------|--------------|
+| Node.js     | Runtime      |
+| Express.js  | REST API     |
+| MongoDB     | Database     |
+| Railway     | Deployment   |
+
+### Frontend
+
+| Tech       | Usage        |
+|-----------|--------------|
+| React 18  | UI Framework |
+| Vite      | Dev/Build    |
+| CSS       | Styling      |
+| Vercel    | Deployment   |
+
+---
+
+## 🔎 Search
 
 Full-text, case-insensitive search on:
 
-Customer Name
+- Customer Name
+- Phone Number
 
-Phone Number
+Features:
 
-Features
+✔ Real-time  
+✔ Works with all filters  
+✔ Resets to page 1  
+✔ Regex-based matching
 
-✔ Real-time
-✔ Works with all filters
-✔ Resets to page 1
-✔ Uses regex for flexible matching
+---
 
-🎛️ Filters
-Multi-Select
+## 🎛️ Filters
 
-Regions
+### Multi-Select Filters
 
-Genders
+- Regions
+- Genders
+- Categories
+- Tags
+- Payment Methods
 
-Categories
+### Range Filters
 
-Tags
+- Age Range (ageMin, ageMax)
+- Date Range (dateFrom, dateTo)
 
-Payment Methods
+**Behavior:**
 
-Range Filters
-
-Age range (ageMin, ageMax)
-
-Date range (dateFrom, dateTo)
-
-Behavior
-
-✔ Combine together
-✔ Empty filters ignored
+✔ Combine together  
+✔ Empty filters ignored  
 ✔ Invalid ranges auto-corrected
 
-🔄 Sorting
+---
 
-Supported sort fields:
+## 🔄 Sorting
 
-Field	Description
-date	Newest → Oldest
-quantity	High → Low
-customerName	A → Z
-Features
+### Supported fields:
 
-✔ Toggle direction (asc/desc)
-✔ Preserves filters & pagination
+| Field        | Description          |
+|-------------|----------------------|
+| date        | Newest → Oldest      |
+| quantity    | High → Low           |
+| customerName| A → Z                |
+
+Features:
+
+✔ Toggle direction (asc/desc)  
+✔ Preserves filters & pagination  
 ✔ Visual indicators in UI
 
-📄 Pagination
+---
+
+## 📄 Pagination
 
 10 results per page (configurable)
 
-Metadata returned:
+Pagination metadata:
 
+```
 {
   total,
   page,
@@ -97,41 +108,45 @@ Metadata returned:
   hasNextPage,
   hasPreviousPage
 }
+```
 
-Behavior
+Behavior:
 
-✔ Works with search & filters
+✔ Works with search & filters  
 ✔ Resets when query changes
 
-🧩 API Endpoints
-GET /api/sales/transactions
+---
+
+## 🧩 API Endpoints
+
+### GET /api/sales/transactions
 
 Supports query params:
 
-search
-regions
-genders
-ageMin
-ageMax
-categories
-tags
-paymentMethods
-dateFrom
-dateTo
-sortBy
-sortDir
-page
-pageSize
+- search
+- regions
+- genders
+- ageMin, ageMax
+- categories
+- tags
+- paymentMethods
+- dateFrom, dateTo
+- sortBy, sortDir
+- page, pageSize
 
+**Example:**
 
-Example:
-
+```
 /api/sales/transactions?page=1&sortBy=date&sortDir=desc
+```
 
-GET /api/sales/filter-options
+---
 
-Returns dropdown values:
+### GET /api/sales/filter-options
 
+Returns:
+
+```
 {
   regions: [],
   genders: [],
@@ -139,43 +154,68 @@ Returns dropdown values:
   tags: [],
   paymentMethods: []
 }
+```
 
-GET /health
+---
 
-Health check endpoint:
+### GET /health
 
+Health check:
+
+```
 {
   "status": "OK",
   "message": "Server is running"
 }
+```
 
-🧪 Setup Instructions
-Backend
+---
+
+## 🧪 Setup Instructions
+
+### Backend
+
+```
 cd backend
 npm install
 npm run dev
+```
 
+### Frontend
 
-
-Frontend
+```
 cd frontend
 npm install
 npm run dev
+```
 
+---
 
+## 🏗️ Production Build
 
-🏗️ Production Build
-Backend
+### Backend
+
+```
 npm start
+```
 
-Frontend
+### Frontend
+
+```
 npm run build
-
+```
 
 Output:
-📁 frontend/dist
 
-📁 Project Structure
+```
+📁 frontend/dist
+```
+
+---
+
+## 📁 Project Structure
+
+```
 truestate/
 ├── backend/
 │   ├── src/
@@ -191,65 +231,80 @@ truestate/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── hooks/
-│   │   ├── Services/
+│   │   ├── services/
 │   │   └── App.jsx
 │   ├── public/
 │   └── index.html
 │
 └── docs/
     └── architecture.md
+```
 
-⭐ Features
+---
 
-✔ Full-text search
-✔ Multi-select filters
-✔ Range filters
-✔ Sorting
-✔ Pagination
-✔ Loading & error states
-✔ Responsive UI
+## ⭐ Features
+
+✔ Full-text search  
+✔ Multi-select filters  
+✔ Range filters  
+✔ Sorting  
+✔ Pagination  
+✔ Loading & error states  
+✔ Responsive UI  
 ✔ Clean architecture
 
-🧠 Code Quality
+---
 
-Modular services layer
+## 🧠 Code Quality
 
-Separation of concerns
+- Modular service layer
+- Separation of concerns
+- Graceful error handling
+- Pure React hooks (no state libraries)
+- Component-scoped styling
 
-Graceful error handling
+---
 
-No global state libraries — pure React hooks
+## 📦 Deployment
 
-Component-scoped styling
-
-📦 Deployment
-Backend (Railway)
+### Backend (Railway)
 
 Environment variables:
 
+```
 NODE_ENV=production
 PORT=4000
-MONGO_URL=<your mongodb atlas url>
-FRONTEND_URL=<your vercel url>
+MONGO_URL=
+FRONTEND_URL=
+```
 
-Frontend (Vercel)
-VITE_API_URL=https://<your-railway-app>.up.railway.app/api/sales
+### Frontend (Vercel)
 
-🧭 Health Check
+```
+VITE_API_URL=https://<railway-url>.up.railway.app/api/sales
+```
+
+---
+
+## 🧭 Health Check
 
 Visit:
 
-👉 /health
+```
+/health
+```
 
 If you see:
 
-{
-  "status": "OK"
-}
-
+```
+{ "status": "OK" }
+```
 
 Backend is correct.
 
-📜 License
+---
+
+## 📜 License
 
 This project is developed as part of a TruEstate assignment.
+```
