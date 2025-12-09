@@ -1,186 +1,208 @@
-Truestate Architecture Documentation
-Overview
+# Truestate — Architecture Documentation
 
-The system is a full-stack application designed to display and manage retail sales transactions with powerful:
+## OVERVIEW
 
-Search
+Truestate is a full-stack Retail Sales Management System with:
 
-Filtering
+- Search
+- Filtering
+- Sorting
+- Pagination
+- Statistics
 
-Sorting
+Architecture layers:
 
-Pagination
+- Frontend (React + Vite)
+- Backend (Node.js + Express)
+- Database (MongoDB Atlas)
 
-Statistics
+---
 
-The architecture follows a clean separation between:
+## HIGH LEVEL ARCHITECTURE
 
-✔ Frontend (React + Vite)
-✔ Backend (Node.js + Express)
-✔ Database (MongoDB Atlas)
-
-🔷 High-Level Architecture
 ┌──────────────────────────┐
-│  Client Browser          │
+│       Client Browser     │
 └───────────────┬─────────┘
-                │ HTTPS (REST API)
+                │ HTTPS REST API
 ┌───────────────▼─────────┐
-│ Frontend (Vercel)        │
-│ React + Vite             │
+│   Frontend (Vercel)     │
+│   React + Vite          │
 └───────────────┬─────────┘
-                │ API Calls
-                │ https://backend/api/sales
+                │ API Calls (fetch)
 ┌───────────────▼─────────┐
-│ Backend (Railway)        │
-│ Node.js + Express        │
+│   Backend (Railway)     │
+│   Node.js + Express     │
 └───────────────┬─────────┘
                 │ Mongo Driver
 ┌───────────────▼─────────┐
-│ Database (MongoDB Atlas) │
-└──────────────────────────┘
+│   MongoDB Atlas         │
+└─────────────────────────┘
 
-🔷 Backend Architecture
-Tech Stack
-Component	Technology
-Runtime	Node.js
-Web Framework	Express.js
-Database	MongoDB Atlas
-Deployment	Railway
-Structure
+---
+
+## BACKEND ARCHITECTURE
+
+Tech Stack:
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Railway (deployment)
+
+Directory Structure:
+
 backend/
 ├── src/
-│   ├── controllers/        // Handle requests/responses
-│   ├── services/           // Business logic & DB queries
-│   ├── models/             // Mongoose schemas
-│   ├── routes/             // API endpoints
-│   └── index.js            // App entry point
-├── .env                    // Config
+│   ├── controllers/
+│   ├── services/
+│   ├── models/
+│   ├── routes/
+│   └── index.js
+├── .env
 └── package.json
 
-Key Endpoints
-Method	Endpoint	Purpose
-GET	/api/sales/transactions	Fetch paginated data
-GET	/api/sales/filter-options	Fetch filter dropdown values
-GET	/health	Health check
-🔷 Frontend Architecture
-Tech Stack
-Component	Technology
-Framework	React 18
-Build Tool	Vite
-Deployment	Vercel
-Styling	CSS
-Structure
+Endpoints:
+GET /api/sales/transactions
+GET /api/sales/filter-options
+GET /health
+
+---
+
+## FRONTEND ARCHITECTURE
+
+Tech Stack:
+- React 18
+- Vite
+- CSS
+- Vercel (deployment)
+
+Directory Structure:
+
 frontend/
 ├── src/
-│   ├── components/        // UI Components
-│   ├── hooks/             // Custom React hooks
-│   ├── Services/          // API calls
-│   ├── utils/             // Helpers
+│   ├── components/
+│   ├── hooks/
+│   ├── services/
+│   ├── utils/
 │   └── App.jsx
 ├── public/
 └── index.html
 
-🔷 Data Flow
+---
 
-User interacts with filters/search/table
+## DATA FLOW
 
-Frontend creates query parameters
-
-API call → Backend /api/sales/transactions
-
+User -> UI interaction  
+↓  
+Frontend builds query params  
+↓  
+GET /api/sales/transactions  
+↓  
 Backend:
+- Builds Mongo query
+- Applies filters
+- Applies sort
+- Applies pagination
 
-Builds Mongo query
+↓  
+Returns JSON  
+↓  
+Frontend renders data
 
-Fetches data
+---
 
-Applies sort & pagination
+## ENVIRONMENT VARIABLES
 
-JSON returned to frontend
+Backend (.env):
 
-UI updates
-
-🔷 Environment Variables
-Backend (.env)
 NODE_ENV=production
 PORT=4000
-MONGO_URL=your-atlas-connection-string
+MONGO_URL=your-mongodb-atlas-url
 FRONTEND_URL=https://your-frontend.vercel.app
 
-Frontend (.env)
-VITE_API_URL=https://your-backend-url.up.railway.app/api/sales
+Frontend (.env):
 
-🔷 Deployment
-Frontend → Vercel
+VITE_API_URL=https://your-backend.up.railway.app/api/sales
 
-Commands:
+---
+
+## DEPLOYMENT
+
+Frontend (Vercel):
 
 cd frontend
 npm install
 npm run build
 
-
-Environment:
-
+Env:
 VITE_API_URL=https://your-backend-url/api/sales
 
-Backend → Railway
-
-Commands:
+Backend (Railway):
 
 cd backend
 npm install
 npm start
 
-
-Environment:
-
+Env:
 NODE_ENV=production
 PORT=4000
 MONGO_URL=your-atlas-url
 FRONTEND_URL=https://vercel-url
 
-🔷 API Examples
-Fetch Transactions
+---
+
+## API EXAMPLES
+
+Fetch Transactions:
 GET /api/sales/transactions?page=1&pageSize=10&sortBy=date&sortDir=desc
 
-Fetch Filters
+Fetch Filter Options:
 GET /api/sales/filter-options
 
-🔷 Security
+---
 
-✔ CORS enabled
-✔ Environment variables only (no secrets in code)
-✔ MongoDB user limited to read/write
-✔ Sanitized input & error handling
-✔ Express validation
+## SECURITY
 
-🔷 Future Enhancements
+- CORS enabled
+- Environment variables used
+- Mongo DB user limited to read/write
+- Sanitized input
+- Proper error handling
 
-Authentication & RBAC
+---
 
-Export CSV/Excel
+## FUTURE ENHANCEMENTS
 
-Advanced analytics
+- Authentication & RBAC
+- Export CSV/Excel
+- Analytics
+- Debounced search
+- Redis caching
+- Live updates
 
-Debounced search
+---
 
-Redis caching
+## REPOSITORY STRUCTURE
 
-Live updates
+truestate/
+├── backend/
+├── frontend/
+├── docs/
+│   └── architecture.md
+└── README.md
 
-📌 Summary
+---
 
-This solution is:
+## SUMMARY
 
-Modular
+This application is:
 
-Scalable
+- Modular
+- Scalable
+- Fast
+- Secure
+- Production-ready
 
-Fast
+Frontend runs on Vercel.
+Backend runs on Railway.
+MongoDB hosted on Atlas.
 
-Secure
-
-Deployment-ready
-
-Both frontend and backend are independently deployable, connected via REST APIs, with MongoDB Atlas as persistent storage.
