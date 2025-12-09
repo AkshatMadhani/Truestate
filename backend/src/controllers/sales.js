@@ -10,7 +10,7 @@ const parseNumber = (param, defaultValue = null) => {
   const num = Number(param);
   return isNaN(num) ? defaultValue : num;
 };
-
+// all transactions details
 export const getTransactions = async (req, res) => {
   try {
     const {
