@@ -4,7 +4,7 @@ import TopFilterBar from './components/FilterPanel';
 import StatsCards from './components/StatsCard';
 import TransactionsTable from './components/TransactionTable';
 import { useTransactionData } from './hooks/useTransaction';
-import { useFilterData } from './hooks/useFilterData';
+import { useFilterData } from './hooks/usefilterdata';
 
 function App() {
   const { salesData, metaData, loading, error, queryParams, updateFilters } = useTransactionData();
