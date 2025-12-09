@@ -19,24 +19,30 @@ Architecture layers:
 ---
 
 ## HIGH LEVEL ARCHITECTURE
-
-┌──────────────────────────┐
-│       Client Browser     │
-└───────────────┬─────────┘
-                │ HTTPS REST API
-┌───────────────▼─────────┐
-│   Frontend (Vercel)     │
-│   React + Vite          │
-└───────────────┬─────────┘
-                │ API Calls (fetch)
-┌───────────────▼─────────┐
-│   Backend (Railway)     │
-│   Node.js + Express     │
-└───────────────┬─────────┘
-                │ Mongo Driver
-┌───────────────▼─────────┐
-│   MongoDB Atlas         │
-└─────────────────────────┘
++--------------------------+
+|      Client Browser      |
++------------+-------------+
+             |
+             |  HTTPS / REST
+             |
++------------v-------------+
+|     Frontend (Vercel)    |
+|  React + Vite Application|
++------------+-------------+
+             |
+             |  API Calls (fetch)
+             |
++------------v-------------+
+|    Backend (Railway)     |
+| Node.js + Express Server |
++------------+-------------+
+             |
+             |  Mongo Driver
+             |
++------------v-------------+
+|   MongoDB Atlas Cluster  |
+|  (Sales Transactions)    |
++--------------------------+
 
 ---
 
@@ -49,16 +55,46 @@ Tech Stack:
 - Railway (deployment)
 
 Directory Structure:
+truestate/
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── db.js
+│   │   ├── controllers/
+│   │   │   └── sales.js
+│   │   ├── models/
+│   │   │   └── Sales.js
+│   │   ├── routes/
+│   │   │   └── sales.js
+│   │   └── index.js
+│   ├── package.json
+│   ├── .env
+│   └── README.md
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── FilterPanel.jsx
+│   │   │   ├── TransactionTable.jsx
+│   │   │   ├── StatsCard.jsx
+│   │   │   └── Sidebar.jsx
+│   │   ├── hooks/
+│   │   │   ├── useFilterData.js
+│   │   │   └── useTransactions.js
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   └── App.jsx
+│   ├── public/
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── .env
+│   └── README.md
+│
+├── docs/
+│   └── architecture.md
+│
+└── README.md
 
-backend/
-├── src/
-│   ├── controllers/
-│   ├── services/
-│   ├── models/
-│   ├── routes/
-│   └── index.js
-├── .env
-└── package.json
 
 Endpoints:
 GET /api/sales/transactions
@@ -74,18 +110,6 @@ Tech Stack:
 - Vite
 - CSS
 - Vercel (deployment)
-
-Directory Structure:
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── hooks/
-│   ├── services/
-│   ├── utils/
-│   └── App.jsx
-├── public/
-└── index.html
 
 ---
 
