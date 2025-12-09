@@ -13,7 +13,6 @@ Architecture layers:
 - Backend (Node.js + Express)
 - Database (MongoDB Atlas)
 
----
 
 ## HIGH LEVEL ARCHITECTURE
 
@@ -42,7 +41,7 @@ Architecture layers:
 |  (Sales Transactions)    |
 +--------------------------+
 
----
+
 
 ## BACKEND ARCHITECTURE
 
