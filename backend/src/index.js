@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dbcon from './config/db.js';
 import router from './routes/sales.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,10 +13,16 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+// Connect to DB
 dbcon();
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Health check
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
@@ -24,17 +31,23 @@ app.get('/health', (req, res) => {
   });
 });
 
+
 app.use('/api/sales', router);
 
+// Serve frontend only in production
 if (process.env.NODE_ENV === 'production') {
   const frontendDistPath = path.join(__dirname, '../../frontend/dist');
+
+
   app.use(express.static(frontendDistPath));
 
+
   app.get('/*', (req, res) => {
-  if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(frontendDistPath, 'index.html'));
-  }
-});
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(frontendDistPath, 'index.html'));
+    }
+  });
+}
 
 
 app.use((req, res) => {
@@ -44,6 +57,7 @@ app.use((req, res) => {
   });
 });
 
+
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(err.status || 500).json({
@@ -52,9 +66,10 @@ app.use((err, req, res, next) => {
   });
 });
 
+
 app.listen(PORT, () => {
   console.log(` Server running on port ${PORT}`);
-  console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`✓Environment: ${process.env.NODE_ENV || 'development'}`); 
 });
 
 export default app;
