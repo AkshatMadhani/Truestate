@@ -31,25 +31,25 @@ app.get('/health', (req, res) => {
   });
 });
 
-
+// API routes
 app.use('/api/sales', router);
 
 // Serve frontend only in production
 if (process.env.NODE_ENV === 'production') {
   const frontendDistPath = path.join(__dirname, '../../frontend/dist');
 
-
+  // Serve static files
   app.use(express.static(frontendDistPath));
 
-
-  app.get('/*', (req, res) => {
+  // Wildcard SPA route for all non-API requests
+  app.get('(.*)', (req, res) => {
     if (!req.path.startsWith('/api')) {
       res.sendFile(path.join(frontendDistPath, 'index.html'));
     }
   });
 }
 
-
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     error: 'Not Found',
@@ -57,7 +57,7 @@ app.use((req, res) => {
   });
 });
 
-
+// Global error handler
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(err.status || 500).json({
@@ -66,10 +66,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-
+// Start server
 app.listen(PORT, () => {
-  console.log(` Server running on port ${PORT}`);
-  console.log(`✓Environment: ${process.env.NODE_ENV || 'development'}`); 
+  console.log(`✓ Server running on port ${PORT}`);
+  console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
 export default app;
+
