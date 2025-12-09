@@ -1,13 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dbcon from './config/db.js';
 import router from './routes/sales.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -34,21 +29,6 @@ app.get('/health', (req, res) => {
 // API routes
 app.use('/api/sales', router);
 
-// Serve frontend only in production
-if (process.env.NODE_ENV === 'production') {
-  const frontendDistPath = path.join(__dirname, '../../frontend/dist');
-
-  // Serve static files
-  app.use(express.static(frontendDistPath));
-
-  // Wildcard SPA route for all non-API requests
-  app.get('(.*)', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(frontendDistPath, 'index.html'));
-    }
-  });
-}
-
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({
@@ -73,4 +53,3 @@ app.listen(PORT, () => {
 });
 
 export default app;
-
