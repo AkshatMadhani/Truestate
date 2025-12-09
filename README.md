@@ -215,30 +215,48 @@ Output:
 
 ## 📁 Project Structure
 
-```
 truestate/
 ├── backend/
 │   ├── src/
+│   │   ├── config/
+│   │   │   └── db.js
 │   │   ├── controllers/
-│   │   ├── services/
+│   │   │   └── sales.js
+│   │   ├── models/
+│   │   │   └── Sales.js
 │   │   ├── routes/
+│   │   │   └── sales.js
 │   │   └── index.js
-│   ├── models/
-│   ├── config/
-│   └── .env
+│   ├── package.json
+│   ├── .env
+│   └── README.md
 │
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
+│   │   │   ├── FilterPanel.jsx
+│   │   │   ├── TransactionTable.jsx
+│   │   │   ├── StatsCard.jsx
+│   │   │   └── Sidebar.jsx
 │   │   ├── hooks/
+│   │   │   ├── useFilterData.js
+│   │   │   └── useTransactions.js
 │   │   ├── services/
+│   │   │   └── api.js
 │   │   └── App.jsx
 │   ├── public/
-│   └── index.html
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── .env
+│   └── README.md
 │
-└── docs/
-    └── architecture.md
-```
+├── docs/
+│   └── architecture.md
+│
+└── README.md
+
+
+
 
 ---
 
@@ -304,7 +322,10 @@ Backend is correct.
 
 ---
 
-## 📜 License
+## 📜 License This project is developed as part of a TruEstate assignment.
+
+
+
 
 This project is developed as part of a TruEstate assignment.
 ```
